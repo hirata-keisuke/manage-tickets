@@ -1,0 +1,30 @@
+version: '3'
+services:
+  python-util:
+    build: ./python
+    tty: true
+    volumes:
+      - ./python/data:/python-redmine-util/data
+      - ./python/src:/python-redmine-util/src
+
+  mariadb:
+    image: mariadb:10.6
+    volumes:
+      - ./mariadb/data:/var/lib/mysql
+    environment:
+      - MARIADB_ROOT_PASSWORD=password
+      - MARIADB_DATABASE=redmine
+
+  redmine:
+    image: redmine:5.0.2
+    volumes:
+      - ./redmine/data:/usr/src/redmine/files
+    ports:
+      - 8080:3000
+    depends_on:
+      - mariadb
+    environment:
+      - REDMINE_DB_MYSQL=mariadb
+      - REDMINE_DB_USERNAME=root
+      - REDMINE_DB_PASSWORD=password
+      - REDMINE_SECRET_KEY_BASE=supersecretkey
