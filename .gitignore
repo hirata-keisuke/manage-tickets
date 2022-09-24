@@ -1,5 +1,3 @@
 !/mariadb/data/.gitkeep
 /mariadb/data/*
 
-!/redmine/data/.gitkeep
-/redmine/data/*
