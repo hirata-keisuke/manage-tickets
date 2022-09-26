@@ -18,7 +18,8 @@ services:
   redmine:
     image: redmine:5.0.2
     volumes:
-      - ./redmine/data:/usr/src/redmine/files
+      - ./redmine/data:/usr/src/redmine/log
+      - ./redmine/plugins:/usr/src/redmine/plugins
     ports:
       - 8080:3000
     depends_on:
